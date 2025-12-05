@@ -47,6 +47,23 @@ class Grid(Generic[T]):
 				return TypeError(f"Not implemented for type {idx.__class__}")
 		else:
 			return TypeError(f"Not implemented for type {idx.__class__}")
+		
+	def get_neighbors(self, r, c, include=['N', 'E', 'S', 'W', 'NE', 'SE', 'SW', 'NW']):
+		dirs = {
+			'N': (-1, 0),
+			'E': (0, 1),
+			'S': (1, 0),
+			'W': (0, -1),
+			'NE': (-1, 1),
+			'SE': (1, 1),
+			'SW': (1, -1),
+			'NW': (-1, -1),
+		}
+		for key in include:
+			(dr, dc) = dirs[key]
+			neighbor = (dr + r, dc + c)
+			if self.in_bounds(neighbor):
+				yield neighbor
 	
 	def __contains__(self, idx):
 		return self.in_bounds(idx)

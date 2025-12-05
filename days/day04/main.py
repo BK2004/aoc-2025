@@ -4,19 +4,9 @@ from utils.jaggedgrid import *
 from utils.graph import *
 from utils.linkedlist import *
 
-def get_neighbors(g, r, c):
-	dirs = [-1, 0, 1]
-	for x in dirs:
-		for y in dirs:
-			if x == y == 0:
-				continue
-			neighbor = (x + r,y + c)
-			if g.in_bounds(neighbor):
-				yield neighbor
-
 def can_access(g, r, c):
 	cnt = 0
-	for n in get_neighbors(g, r, c):
+	for n in g.get_neighbors(r, c):
 		if g[n] == '@':
 			cnt += 1
 	return cnt < 4
